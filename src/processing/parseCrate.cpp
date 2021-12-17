@@ -18,7 +18,9 @@ int main() {
 
     char *fname = (char*)"database V2";
     std::string fileContents = parseDatabaseFile(fname);
-    
+    // parseStringData(fileContents);
+    std::vector<std::string> myvector = splitString(fileContents, "fil");
+    std::cout << myvector.size();
 
 
     return 1;
@@ -27,7 +29,7 @@ int main() {
 // Parses through a Serato Database file and converts it from binary to a single string
 /*
     Inputs:
-        char* -=- the name of the database file
+        char* filename -=- the name of the database file
     Outputs:
         String -=- a string containing all the contents of the file  
 */
@@ -54,8 +56,40 @@ std::string parseDatabaseFile(char *filename) {
     return fileContents;
 }
 
+// Takes the string data and splits it into critical values
+/*
+    Inputs:
+        string fileContents -=- The contents of the DB file in string form
+    Outputs:
+         
+*/
 void parseStringData(std::string fileContents) {
     std::cout << fileContents;
 
+    
+
     return;
+}
+
+// Simple split function that splits a string based on a delimiter
+/*
+    Inputs:
+        string str -=- the string to be split
+        string del -=- the delimiter
+    Outputs:
+        String -=- a string containing all the contents of the file  
+*/
+std::vector<std::string> splitString(std::string str, std::string del) {
+    std::vector<std::string> contentList;
+
+    int start = 0;
+    int end = str.find(del);
+    while (end != -1) {
+        contentList.push_back(str.substr(start, end - start));
+        start = end + del.size();
+        end = str.find(del, start);
+    }
+    contentList.push_back(str.substr(start, end - start));
+
+    return contentList;
 }
