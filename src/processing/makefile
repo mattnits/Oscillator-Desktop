@@ -1,4 +1,4 @@
-all: parseCrate.cpp
-	g++ -Wall -Wextra -Werror parseCrate.cpp -o a
+all: parseCrate.cpp song.cpp
+	g++ -Wall -Wextra -Werror parseCrate.cpp song.cpp -o a
 clean:
 	$(RM) a

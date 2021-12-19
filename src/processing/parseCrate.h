@@ -6,12 +6,16 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <array>
+#include "song.h"
 
 const int STX = 02;
 
 std::string parseDatabaseFile(char* filename);
-void parseStringData(std::string fileContents);
+std::vector<Song> parseStringData(std::string fileContents);
 std::vector<std::string> splitString(std::string str, std::string del);
+Song createSongFromString(std::string songStr);
+std::vector<std::string> splitByTagName(std::string songStr, std::vector<std::string> songData);
 
 
 #endif
