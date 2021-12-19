@@ -1,11 +1,13 @@
 #include "parseCrate.h"
 
-const std::array<std::string, 9> tagList = {"tsng", "tart", "tlen", "tsiz", "tbit", "tsmp", "tbpm", "tadd", "tkey"};
+const std::array<std::string, 10> tagList = {"tsng", "tart", "tlen", "tsiz", "tbit", "tsmp", "tbpm", "tadd", "tkey", "uadd"};
 
 int main() {
+    std::vector<Song> songList;
     char *fname = (char*)"database V2";
     std::string fileContents = parseDatabaseFile(fname);
-    parseStringData(fileContents);
+    songList = parseStringData(fileContents);
+    std::cout << songList.size();
 
     return 1;
 }
@@ -54,6 +56,7 @@ std::string parseDatabaseFile(char *filename) {
         unsigned char buffer[1];
         fread(buffer, sizeof(buffer), 1, fh);
 
+        // Gets rid of unwanted characters
         if (buffer[0] >= 32 && buffer[0] < 127) {
             char strbuffer = buffer[0];
             fileContents.push_back(strbuffer);
@@ -72,6 +75,7 @@ std::string parseDatabaseFile(char *filename) {
 */
 std::vector<Song> parseStringData(std::string fileContents) {
     std::vector<Song> songList;
+    std::vector<std::string> songData;
     Song tempSong;
     
     std::vector<std::string> songStringList = splitString(fileContents, "fil");
@@ -79,72 +83,44 @@ std::vector<Song> parseStringData(std::string fileContents) {
     // Erase DB info at front
     songStringList.erase(songStringList.begin());
 
-    // int songListSize = songStringList.size();
-    for (int i=0; i < 1; i++) {
-        
-        tempSong = createSongFromString(songStringList.at(i));
-        // std::cout << tempSong.getSongName();
+    for (int i=0; i < (int)songStringList.size(); i++) {
+        songData = splitByTagName(songStringList.at(i));        
+        Song song(songData);
+        song.printSongData();
+        songList.push_back(song);
     }
 
     return songList;
 }
 
-
-
-Song createSongFromString(std::string songStr) {
+// Splits a song string into its different attributes
+/*
+    Inputs:
+        string songStr -=- Data of a song in string form
+    Outputs:
+        vector -=- A list of the inputted songs attributes
+*/
+std::vector<std::string> splitByTagName(std::string songStr) {
 
     std::vector<std::string> songData, tempSongData;
-
-    Song song("1", "2", 51, 1);
     
-    songData = splitByTagName(songStr, songData);
-    
-    for (int i = 0; i < (int)songData.size(); i++){
-        std::cout << songData.at(i) << "\n";
-    }
-    
-
-    return song;
-}
-
-std::vector<std::string> splitByTagName(std::string songStr, std::vector<std::string> songData) {
-
-    std::vector<std::string> tempSongData;
-
     tempSongData = splitString(songStr, tagList.at(0));
+    songData.push_back(tempSongData.at(0));
 
     for (int i = 1; i < (int)tagList.size(); i++) {
-        tempSongData = splitString(songStr, tagList.at(i));
-
-        tempSongData.size() > 1 ? songData.push_back(tempSongData.at(1)) : songData.push_back(""); 
         
-    }
-    
-    
+        if (tempSongData.size() > 1) {
+            tempSongData = splitString(tempSongData.at(1), tagList.at(i));
+        } else {
+            tempSongData = splitString(tempSongData.at(0), tagList.at(i));
+        }
 
+        tempSongData.size() > 1 ? songData.push_back(tempSongData.at(0)) : songData.push_back("NULL");     
+    }
+
+    // Erases the memory location in the array
+    songData.erase(songData.begin() + 8);
+    
 
     return songData;
 }
-
-
-/*
-Music/Melodic Dubstep/Grant & RUNN - Contagious [Monstercat EP Release].mp3
-tsngbGrant & RUNN - Contagious [Monstercat EP Release]
-tart ARTIST NAME
-tlen03:36.82
-tsiz5.0MB
-tbit192.0kbps
-tsmp44.1k
-tbpm103.00
-tadd1584818735
-tkeyEuadd^vj/ulblu
-tme_Lu
-tpcsbavbhr
-tbmisbplyblopbi
-tubovcbcrtbirobwlbbwllbunsbbglbkrko
-trk7
-ttypmp3p
-
-
-
-*/
