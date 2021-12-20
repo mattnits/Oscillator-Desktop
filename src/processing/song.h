@@ -15,8 +15,12 @@ class Song {
         std::string sampleRate;
         float bpm;
         std::string key;
+        int _errorState;
         
         int songLengthToSeconds(std::string songLength);
+
+        // Debug Methods
+        void _printDataList(std::vector<std::string> songDataList);
     
     public:
         // Constructors
@@ -46,6 +50,7 @@ class Song {
 
         // Methods
         void printSongData();
+        int inErrorState() {return _errorState;}
 };
 
 #endif

@@ -9,6 +9,7 @@ Song::Song(std::vector<std::string> songDataList) {
     if (songDataList.size() < 9) {
         throw "Error creating Song. Missing values!";
     }
+    _errorState = 0;
     fileName = songDataList.at(0);
     songName = songDataList.at(1);
     artistName = songDataList.at(2);
@@ -35,6 +36,7 @@ void Song::setSongBpm(std::string newBpm) {
         bpm = (float)value / 10;
     } catch (...) {
         std::cout << "Error occured getting BPM\n";
+        _errorState = 1;
         bpm = -1;
     }
     
@@ -57,10 +59,9 @@ int Song::songLengthToSeconds(std::string songLength) {
         songLen += stoi(songLength.substr(start, end - start));
     } catch (...) {
         std::cout << "Error occured converting song length to seconds\n";
+        _errorState = 1;
         songLen = -1;
     }
-    
-
 
     return songLen;
 }
@@ -87,4 +88,12 @@ void Song::printSongData() {
         << "s\nBPM:\t\t" << bpm << "\nSize:\t\t" << fileSize << "\nBit Rate:\t" << bitRate 
         << "\nSample Rate:\t" << sampleRate << "\nKey:\t\t" << key  
         << "\n---------------------------------------------\n";
+}
+
+void Song::_printDataList(std::vector<std::string> songDataList) {
+    std::cout << "Data List: \n";
+    for (int i = 0; i < (int)songDataList.size(); i++) {
+        std::cout << songDataList.at(i) << "\n";
+    }
+    
 }
