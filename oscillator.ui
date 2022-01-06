@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>418</height>
+    <width>502</width>
+    <height>512</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,131 +18,225 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>80</y>
+      <y>0</y>
       <width>501</width>
-      <height>331</height>
+      <height>491</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
      <item>
-      <widget class="QTableWidget" name="tableWidget">
-       <column>
-        <property name="text">
-         <string>Track #</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Track</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Artist</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>BPM</string>
-        </property>
-       </column>
-       <column>
-        <property name="text">
-         <string>Key</string>
-        </property>
-       </column>
+      <widget class="QTabWidget" name="tabWidget">
+       <property name="tabShape">
+        <enum>QTabWidget::Triangular</enum>
+       </property>
+       <property name="currentIndex">
+        <number>1</number>
+       </property>
+       <widget class="QWidget" name="tab">
+        <attribute name="title">
+         <string>My Database</string>
+        </attribute>
+        <widget class="QTableWidget" name="songTable">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>110</y>
+           <width>499</width>
+           <height>351</height>
+          </rect>
+         </property>
+         <column>
+          <property name="text">
+           <string>Track</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Artist</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>BPM</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Key</string>
+          </property>
+         </column>
+        </widget>
+        <widget class="QLineEdit" name="dbFileText">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>20</y>
+           <width>191</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string>Serato DB File Location</string>
+         </property>
+         <property name="maxLength">
+          <number>100</number>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="dbOpenFile">
+         <property name="geometry">
+          <rect>
+           <x>240</x>
+           <y>20</y>
+           <width>80</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Open File</string>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="dbFileButton">
+         <property name="geometry">
+          <rect>
+           <x>390</x>
+           <y>20</y>
+           <width>80</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Get DB</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_2">
+        <attribute name="title">
+         <string>Search Songs</string>
+        </attribute>
+        <widget class="QTableWidget" name="searchTable">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>70</y>
+           <width>499</width>
+           <height>391</height>
+          </rect>
+         </property>
+         <column>
+          <property name="text">
+           <string>Track</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Artist</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>BPM</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Key</string>
+          </property>
+         </column>
+        </widget>
+        <widget class="QLineEdit" name="songText">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>30</y>
+           <width>151</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string>Song Name</string>
+         </property>
+         <property name="maxLength">
+          <number>100</number>
+         </property>
+         <property name="cursorPosition">
+          <number>9</number>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="artistText">
+         <property name="geometry">
+          <rect>
+           <x>190</x>
+           <y>30</y>
+           <width>151</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="inputMask">
+          <string/>
+         </property>
+         <property name="text">
+          <string>Artist Text</string>
+         </property>
+         <property name="maxLength">
+          <number>100</number>
+         </property>
+         <property name="cursorPosition">
+          <number>11</number>
+         </property>
+        </widget>
+        <widget class="QPushButton" name="songButton">
+         <property name="geometry">
+          <rect>
+           <x>370</x>
+           <y>30</y>
+           <width>80</width>
+           <height>24</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Get Songs</string>
+         </property>
+        </widget>
+       </widget>
+       <widget class="QWidget" name="tab_5">
+        <attribute name="title">
+         <string>Currently Playing</string>
+        </attribute>
+        <widget class="QLabel" name="comingSoonLabel">
+         <property name="geometry">
+          <rect>
+           <x>130</x>
+           <y>100</y>
+           <width>211</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="font">
+          <font>
+           <family>Sans Serif</family>
+           <pointsize>20</pointsize>
+          </font>
+         </property>
+         <property name="text">
+          <string>COMING SOON</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </widget>
       </widget>
      </item>
     </layout>
-   </widget>
-   <widget class="QPushButton" name="dbFileButton">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>10</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Get DB</string>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="dbFileText">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>191</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string>Serato DB File Location</string>
-    </property>
-    <property name="maxLength">
-     <number>100</number>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="songText">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>50</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string>Song Name</string>
-    </property>
-    <property name="maxLength">
-     <number>100</number>
-    </property>
-    <property name="cursorPosition">
-     <number>9</number>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="artistText">
-    <property name="geometry">
-     <rect>
-      <x>190</x>
-      <y>50</y>
-      <width>151</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="inputMask">
-     <string/>
-    </property>
-    <property name="text">
-     <string>Artist Text</string>
-    </property>
-    <property name="maxLength">
-     <number>100</number>
-    </property>
-    <property name="cursorPosition">
-     <number>11</number>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="songButton">
-    <property name="geometry">
-     <rect>
-      <x>370</x>
-      <y>50</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Get Songs</string>
-    </property>
    </widget>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>

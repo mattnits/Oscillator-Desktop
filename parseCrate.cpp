@@ -3,6 +3,26 @@
 const std::array<std::string, 10> tagList = {"tsng", "tart", "tlen", "tsiz", "tbit", "tsmp", "tbpm", "tadd", "tkey", "uadd"};
 const std::array<std::string, 2> errorList = {"e: This", "e contains"};
 
+// The main function in ParseCrate that calls all other functions in order
+/*
+    Inputs:
+        char *fname -=- the file location to be parsed
+    Outputs:
+        Vector<Song> -=- a vector containing all the contents of the database file in Song object form
+*/
+std::vector<Song> parseCrate(char *fname) {
+    std::vector<Song> songList;
+
+    std::string fileContents = parseDatabaseFile(fname);
+    if (fileContents != "") {
+        songList = parseStringData(fileContents);
+        //printSongDataToConsole(songList);
+    }
+
+    return songList;
+}
+
+
 // Simple split function that splits a string based on a delimiter
 /*
     Inputs:

@@ -9,6 +9,7 @@
 #include <array>
 #include "song.h"
 
+std::vector<Song> parseCrate(char *fname);
 std::string parseDatabaseFile(char* filename);
 std::vector<Song> parseStringData(std::string fileContents);
 std::vector<std::string> splitString(std::string str, std::string del);
